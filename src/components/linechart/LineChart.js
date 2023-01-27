@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import * as d3 from 'd3';
-import { Box } from '@mui/material';
 import AxisBottom from './AxisBottom';
 import AxisLeft from './AxisLeft';
 
