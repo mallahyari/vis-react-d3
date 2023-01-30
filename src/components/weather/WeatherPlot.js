@@ -19,7 +19,7 @@ const dimensions = {
   margin: { top: 50, right: 60, bottom: 50, left: 60 },
 };
 
-export const FitnessPlot = () => {
+export const WeatherPlot = () => {
   const { width, height, margin } = dimensions;
   const boundedDimensions = {
     width: dimensions.width - margin.left - margin.right,
