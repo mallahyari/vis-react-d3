@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { csv } from 'd3';
-const useData = () => {
+export const useData = () => {
   const [data, setData] = useState();
   useEffect(() => {
     csv(
@@ -11,4 +11,11 @@ const useData = () => {
   return data;
 };
 
-export default useData;
+export const useWeatherData = () => {
+  const [data, setData] = useState();
+  useEffect(() => {
+    csv('weather_fake_data.csv').then((dataset) => setData(dataset));
+  }, []);
+
+  return data;
+};
