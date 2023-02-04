@@ -1,15 +1,5 @@
 import React from 'react';
-import { Box } from '@mui/material';
 import * as d3 from 'd3';
-import {
-  // Annotation,
-  EditableAnnotation,
-  HtmlLabel,
-  Label,
-  Connector,
-  CircleSubject,
-  LineSubject,
-} from '@visx/annotation';
 import './styles.css';
 import { useWeatherData } from '../../utils/useData';
 
@@ -30,46 +20,45 @@ export const WeatherPlot = () => {
   const innerRadius = outerRadius / 3;
   const numOfStops = 10;
 
+  // Load the data
   const data = useWeatherData();
+
   if (!data) {
     return <div>Loading...</div>;
   }
 
+  // Define accessors functions
   const tempMinAccessor = (d) => +d.tempMin;
   const tempMaxAccessor = (d) => +d.tempMax;
   const windAccessor = (d) => +d.wind;
   const dateParser = d3.timeParse('%Y-%m-%d');
   const dateAccessor = (d) => dateParser(d.date);
 
+  // Group by the data based on `weather` types
   const dataGroupedByWeather = d3.group(data, (d) => d.weather);
 
+  // Create offsets to easily draw circles with certain offset of the main radius.
   const weatherTypes = Array.from(dataGroupedByWeather.keys());
   const weatherTypeOffsets = weatherTypes.map((t, i) => ({
     type: t,
     offset: 1.18 + i * 0.1,
   }));
 
-  console.log(dataGroupedByWeather.keys().next());
-
   const windOffset = 1.7;
 
+  // Define colors for color coding different types of weather
   const weatherColors = d3.schemeRdYlGn[5];
 
+  // Create gradient color for area path
   const gradientColorScale = d3.interpolateBrBG;
 
+  // Create angle scale for mapping the dates to angles
   const angleScale = d3
     .scaleTime()
     .domain(d3.extent(data, dateAccessor))
     .range([0, 2 * Math.PI]);
 
-  const months = d3.timeMonths(...angleScale.domain());
-
-  const monthsTextPath = months.map((d) => [d, d3.utcMonth.offset(d, 1)]);
-
-  const getCoordinatesForAngle = (angle, radius, offset = 1) => {
-    return d3.pointRadial(angle, radius * offset);
-  };
-
+  // Create radius scale for mapping min and max temperatures to distances
   const radiusScale = d3
     .scaleLinear()
     .domain(
@@ -78,31 +67,42 @@ export const WeatherPlot = () => {
     .range([innerRadius, outerRadius])
     .nice();
 
+  // Create radius scale for wind numbers
   const windRadiusScale = d3
     .scaleSqrt()
     .domain(d3.extent(data, windAccessor))
     .range([2, 10]);
 
+  // Define month names for creating text labels on the plot
+  const months = d3.timeMonths(...angleScale.domain());
+  const monthsTextPath = months.map((d) => [d, d3.utcMonth.offset(d, 1)]);
+
+  // Define a function to convert angle into position
+  const getCoordinatesForAngle = (angle, radius, offset = 1) => {
+    return d3.pointRadial(angle, radius * offset);
+  };
+
+  // Define ticks for our plot
   const tempTicks = radiusScale.ticks(5);
 
+  // Define generators for shape of the plot
   const areaGenerator = d3
     .areaRadial()
     .angle((d) => angleScale(dateAccessor(d)))
     .innerRadius((d) => radiusScale(tempMinAccessor(d)))
     .outerRadius((d) => radiusScale(tempMaxAccessor(d)));
 
-  const lineGenerator = d3
-    .lineRadial()
-    .curve(d3.curveCardinal)
-    .angle((d) => angleScale(dateAccessor(d)))
-    .radius((d) => radiusScale(tempMaxAccessor(d)));
+  // METHOD 1
+  const lineGenerator = areaGenerator.lineOuterRadius();
 
-  // const lineGeneratorMin = d3
+  // METHOD 2
+  // const lineGenerator = d3
   //   .lineRadial()
   //   .curve(d3.curveCardinal)
   //   .angle((d) => angleScale(dateAccessor(d)))
-  //   .radius((d) => radiusScale(tempMinAccessor(d)));
+  //   .radius((d) => radiusScale(tempMaxAccessor(d)));
 
+  // Define a function for creating text annotations on the plot
   const drawAnnotation = (angle, offset, text) => {
     const [x1, y1] = getCoordinatesForAngle(angle, outerRadius, offset);
     const [x2, y2] = getCoordinatesForAngle(angle, outerRadius, 2);
@@ -110,6 +110,7 @@ export const WeatherPlot = () => {
     return { x1, x2, y1, y2, text };
   };
 
+  // Define annotation for various type of information
   const sunAnnotation = drawAnnotation(
     Math.PI * 0.21,
     weatherTypeOffsets.find((el) => el.type === 'sun')['offset'],
@@ -244,8 +245,7 @@ export const WeatherPlot = () => {
           <path
             d={lineGenerator(data)}
             fill="none"
-            stroke="#f8f9fa
-            "
+            stroke="#f8f9fa"
             className="line-radial"
           />
           {/* <path
@@ -305,31 +305,6 @@ export const WeatherPlot = () => {
           <Annotaion annotationData={windAnnotation} />
         </g>
         {/* End of bounded g */}
-        {/* <Annotation
-          width={dimensions.width}
-          height={dimensions.height}
-          x={radiusScale(13)}
-          y={radiusScale(22)}
-          dx={-70}
-          dy={-50}
-        >
-          <CircleSubject
-            // radius={10}
-            x={radiusScale(13)}
-            y={radiusScale(22)}
-            stroke="red"
-            strokeWidth={3}
-          />
-          <Connector
-            stroke="red"
-            x={radiusScale(13)}
-            y={radiusScale(22)}
-            dx={-70}
-            dy={-50}
-            // type="line"
-          />
-          <Label title="Sun" subtitle="This is subtitle" />
-        </Annotation> */}
       </svg>
     </div>
   );

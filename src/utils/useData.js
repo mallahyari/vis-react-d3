@@ -14,7 +14,9 @@ export const useData = () => {
 export const useWeatherData = () => {
   const [data, setData] = useState();
   useEffect(() => {
-    csv('weather_fake_data.csv').then((dataset) => setData(dataset));
+    csv(
+      'https://gist.githubusercontent.com/mallahyari/1e0a70ed89e553ecf2db7e24a9b91d65/raw/02d48c2d42515dd892c41cca13c34cc1d0c09ebe/weather_fake_data.csv'
+    ).then((dataset) => setData(dataset));
   }, []);
 
   return data;

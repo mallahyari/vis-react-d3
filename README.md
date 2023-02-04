@@ -1,6 +1,6 @@
-# Visualization with React and D3
+# Data Visualizations with React and D3
 
-This repo will contain all the codes that are related to my blog posts about _Visualization with React and D3_. Therefore, it will under constant development.
+This repo will contain all the codes that are related to my blog posts about _Data Visualizations with React and D3_. Therefore, it will under constant development. The goal is to create all types of visualization plots including _custom visualizations_ to inspire whoever is enthusiastic about data visualizations.
 
 ## Published blogs
 
