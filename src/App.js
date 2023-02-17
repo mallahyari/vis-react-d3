@@ -5,6 +5,7 @@ import { useData } from './utils/useData';
 import { LineChart } from './components/linechart';
 import { SimpleRadar } from './components/radarchart';
 import { WeatherPlot } from './components/weather';
+import { BarChart } from './components/barchart';
 
 function App() {
   const data = useData();
@@ -15,16 +16,10 @@ function App() {
     <Container className="App">
       {/* <LineChart data={data} /> */}
       {/* <SimpleRadar /> */}
-      <WeatherPlot />
+      {/* <WeatherPlot /> */}
+      <BarChart />
     </Container>
   );
 }
 
 export default App;
-
-// return (
-//   <Container className="App">
-//     <LineChart data={data} />
-//     <SimpleRadar />
-//   </Container>
-// );

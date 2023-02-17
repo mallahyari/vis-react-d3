@@ -1,0 +1,35 @@
+body {
+  font-family: Poppins;
+}
+
+svg {
+  background-color: #f5f3f2;
+}
+.grid-line {
+  /* stroke: #dadadd; */
+  fill: none;
+}
+
+.bar:hover {
+  fill: #684664;
+}
+
+.axis {
+  text-anchor: middle;
+  font-size: 10px;
+  color: #635f5d;
+}
+.axis-label {
+  font-size: 12px;
+}
+.xaxis {
+  text-anchor: middle;
+}
+
+.yaxis {
+  text-anchor: end;
+}
+
+.bar-tooltip {
+  transition: all 0.5s ease-out;
+}
