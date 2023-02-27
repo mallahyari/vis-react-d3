@@ -1,0 +1,25 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.ridge-svg text {
+  font-size: 11px;
+  text-anchor: middle;
+}
+
+.ridge-svg path {
+  mix-blend-mode: multiply;
+}
+
+.ridge-y-axis text {
+  fill: #0075a3;
+}
+
+.x-axis {
+  opacity: 0.8;
+}
+
+.ridge-svg path:hover {
+  cursor: pointer;
+  transition: opacity 0.3s;
+}

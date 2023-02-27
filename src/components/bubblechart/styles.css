@@ -1,0 +1,54 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+.chart-wrapper {
+  display: flex;
+  justify-content: center;
+  height: 800px;
+}
+
+.bubble-wrapper {
+  position: relative;
+  width: 1000px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.bubble-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.bubble-svg text {
+  font-size: 11px;
+  font-weight: 500;
+  text-anchor: middle;
+}
+
+.ridge-svg path {
+  mix-blend-mode: multiply;
+}
+
+.y-axis text {
+  fill: #0c0c0c;
+}
+
+.x-axis {
+  opacity: 0.8;
+}
+
+.mytooltip {
+  transition: all 0.1s ease-out;
+}
+
+.tooltip-info {
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #000;
+  padding: 5px;
+}
+.tooltip-info p {
+  margin: 2px;
+}

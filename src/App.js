@@ -6,18 +6,19 @@ import { LineChart } from './components/linechart';
 import { SimpleRadar } from './components/radarchart';
 import { WeatherPlot } from './components/weather';
 import { BarChart } from './components/barchart';
+import { RidgePlot } from './components/ridgeplot';
+import { BubbleChart, BubbleChartSmooth } from './components/bubblechart';
 
 function App() {
-  const data = useData();
-  if (!data) {
-    return <div>Loading...</div>;
-  }
   return (
     <Container className="App">
-      {/* <LineChart data={data} /> */}
+      {/* <LineChart /> */}
       {/* <SimpleRadar /> */}
       {/* <WeatherPlot /> */}
-      <BarChart />
+      {/* <BarChart /> */}
+      <RidgePlot />
+      {/* <BubbleChart /> */}
+      {/* <BubbleChartSmooth /> */}
     </Container>
   );
 }

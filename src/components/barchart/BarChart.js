@@ -7,6 +7,7 @@ import BarAxisLeft from './BarAxisLeft';
 import BarAxisBottom from './BarAxisBottom';
 import AnimatedBar from './AnimatedBar';
 import './styles.css';
+
 const dimensions = {
   width: 800,
   height: 400,
@@ -67,7 +68,7 @@ export const BarChart = () => {
 
   return (
     <div id="wrapper">
-      <svg width={width} height={height}>
+      <svg className="bar-svg" width={width} height={height}>
         <g transform={`translate(${margin.left},${margin.top})`}>
           {data.map((d, i) => (
             // <g key={i}>

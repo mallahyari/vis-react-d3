@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import * as d3 from 'd3';
 import AxisBottom from './AxisBottom';
 import AxisLeft from './AxisLeft';
+import { useData } from '../../utils/useData';
 
 import './styles.css';
+
+const datasetUrl =
+  'https://gist.githubusercontent.com/mallahyari/8d4f6a43c80154bdb391edbc3f156029/raw/26792b80dbabdd6371bc9ff10c17f9a090495649/apple_stock_price.csv';
 
 const dimensions = {
   width: 800,
@@ -11,7 +15,7 @@ const dimensions = {
   margin: { top: 30, right: 30, bottom: 40, left: 60 },
 };
 
-export const LineChart = ({ data }) => {
+export const LineChart = () => {
   const { width, height, margin } = dimensions;
   const boundedDimensions = {
     width: dimensions.width - margin.left - margin.right,
@@ -22,6 +26,11 @@ export const LineChart = ({ data }) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const [xPos, setXPos] = useState(0);
   const [yPos, setYPos] = useState(0);
+
+  const data = useData(datasetUrl);
+  if (!data) {
+    return <div>Loading...</div>;
+  }
 
   // Define accessors
   const dateParser = d3.timeParse('%Y-%m-%d');
