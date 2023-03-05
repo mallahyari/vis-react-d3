@@ -162,7 +162,8 @@ export const BubbleChartSmooth = () => {
                       stroke="#000"
                       strokeWidth="1"
                       strokeOpacity="0.2"
-                      opacity={opacitySprings[i].opacity}
+                      opacity="1"
+                      // opacity={opacitySprings[i].opacity}
                       // fillOpacity={opacitySprings[i].fillOpacity}
                       onMouseEnter={(e) => handleMouseEnter(e, d)}
                       onMouseLeave={handleMouseLeave}
