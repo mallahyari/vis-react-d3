@@ -16,8 +16,8 @@ function App() {
       {/* <SimpleRadar /> */}
       {/* <WeatherPlot /> */}
       {/* <BarChart /> */}
-      <RidgePlot />
-      {/* <BubbleChart /> */}
+      {/* <RidgePlot /> */}
+      <BubbleChart />
       {/* <BubbleChartSmooth /> */}
     </Container>
   );

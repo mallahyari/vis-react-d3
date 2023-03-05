@@ -22,11 +22,19 @@ export const BubbleChartSmooth = () => {
     width: width - margin.left - margin.right,
     height: height - margin.top - margin.bottom,
   };
+  const data = useData(datasetUrl);
 
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredPoint, setHoveredPoint] = useState();
   const [titleTrendData, setTitleTrendData] = useState();
-  const [opacitySprings, setOpacitySprings] = useState([]);
+  // const [opacitySprings, setOpacitySprings] = useState([]);
+  const [opacitySprings, api] = useSprings(data ? data.length : 0, () => ({
+    to: {
+      opacity: 0.3,
+    },
+    config: { duration: 10 },
+  }));
+
   const {
     tooltipData,
     tooltipLeft,
@@ -36,7 +44,17 @@ export const BubbleChartSmooth = () => {
     hideTooltip,
   } = useTooltip();
 
-  const data = useData(datasetUrl);
+  // useEffect(() => {
+  //   console.log(data);
+  //   if (data) {
+  //     setOpacitySprings(
+  //       data.map((d) => ({
+  //         opacity: 0.3,
+  //         config: { duration: 300 },
+  //       }))
+  //     );
+  //   }
+  // }, [data]);
 
   if (!data) {
     return <div>Loading...</div>;
@@ -78,12 +96,6 @@ export const BubbleChartSmooth = () => {
     .curve(d3.curveMonotoneX);
 
   const handleMouseEnter = (e, dataPoint) => {
-    setOpacitySprings(
-      data.map((d) => ({
-        fillOpacity: d.titleId === dataPoint.titleId ? 1 : 0.1,
-        config: { duration: 300 },
-      }))
-    );
     const titleTrend = data.filter((d) => d.titleId === dataPoint.titleId);
     const [x, y] = d3.pointer(e);
     setTitleTrendData(titleTrend);
@@ -93,17 +105,23 @@ export const BubbleChartSmooth = () => {
       tooltipTop: y + margin.top,
       tooltipData: dataPoint,
     });
+    api.start((i) => {
+      return {
+        to: { opacity: data[i].titleId === dataPoint.titleId ? 1 : 0.1 },
+        config: { duration: 1 },
+      };
+    });
   };
   const handleMouseLeave = () => {
     hideTooltip();
     setHoveredPoint(null);
     setTitleTrendData(null);
-    setOpacitySprings(
-      data.map((d) => ({
-        fillOpacity: 0.3,
-        config: { duration: 300 },
-      }))
-    );
+    api.start((i) => {
+      return {
+        opacity: 0.3,
+        config: { duration: 1 },
+      };
+    });
   };
 
   return (
@@ -144,8 +162,8 @@ export const BubbleChartSmooth = () => {
                       stroke="#000"
                       strokeWidth="1"
                       strokeOpacity="0.2"
-                      fillOpacity={opacitySprings[i].fillOpacity}
-                      // fillOpacity="1"
+                      opacity={opacitySprings[i].opacity}
+                      // fillOpacity={opacitySprings[i].fillOpacity}
                       onMouseEnter={(e) => handleMouseEnter(e, d)}
                       onMouseLeave={handleMouseLeave}
                     />
@@ -160,7 +178,9 @@ export const BubbleChartSmooth = () => {
                     fill={colorScale(yAccessor(d))}
                     strokeWidth="1"
                     strokeOpacity="0.05"
-                    fillOpacity={opacitySprings[i].fillOpacity}
+                    opacity={
+                      opacitySprings[i] ? opacitySprings[i].opacity : 0.3
+                    }
                     // fillOpacity="0.1"
                     onMouseEnter={(e) => handleMouseEnter(e, d)}
                     onMouseLeave={handleMouseLeave}
@@ -177,11 +197,7 @@ export const BubbleChartSmooth = () => {
                   stroke="#000"
                   strokeWidth="1"
                   strokeOpacity="0.2"
-                  fillOpacity={
-                    opacitySprings.length > 0
-                      ? opacitySprings[i].fillOpacity
-                      : 0.3
-                  }
+                  opacity={opacitySprings[i] ? opacitySprings[i].opacity : 0.3}
                   // fillOpacity="0.3"
                   onMouseEnter={(e) => handleMouseEnter(e, d)}
                   onMouseLeave={handleMouseLeave}

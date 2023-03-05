@@ -11,7 +11,7 @@ const datasetUrl =
 
 const dimensions = {
   width: 1000,
-  height: 600,
+  height: 800,
   margin: { top: 100, right: 60, bottom: 100, left: 60 },
 };
 
@@ -95,13 +95,9 @@ export const BubbleChart = () => {
   return (
     <Box className="chart-wrapper">
       <div className="bubble-wrapper">
-        <Typography variant="h5">
-          Interactive Bubble chart - without transition
-        </Typography>
+        <Typography variant="h5">Interactive Bubble chart</Typography>
         <Typography variant="body1" gutterBottom textAlign="left">
-          When you hover the bubbles, it has some flickering effect because it
-          lowers the `opacity` of other bubbles and make the focused bubble
-          stand out.
+          TV dramas shown in America from 1990 - 2018
         </Typography>
         <svg className="bubble-svg" width={width} height={height}>
           <g transform={`translate(${margin.left},${margin.top})`}>
@@ -165,8 +161,8 @@ export const BubbleChart = () => {
                   cx={xScale(xAccessor(d))}
                   cy={yScale(yAccessor(d))}
                   r={radiusScale(shareAccessor(d))}
-                  // fill={colorScale(yAccessor(d))}
-                  fill="#4aaccc"
+                  fill={colorScale(yAccessor(d))}
+                  // fill="#4aaccc"
                   stroke="#000"
                   strokeWidth="1"
                   strokeOpacity="0.2"
@@ -190,8 +186,13 @@ export const BubbleChart = () => {
         {tooltipOpen && (
           <Tooltip className="mytooltip" left={tooltipLeft} top={tooltipTop}>
             <div className="tooltip-info">
-              <strong>{tooltipData.title}</strong>S{tooltipData.seasonNumber}
-              {'  '}({d3.timeFormat('%Y')(dateParser(tooltipData.date))})
+              <span style={{ textAlign: 'left' }}>
+                <strong>{tooltipData.title}</strong>
+              </span>
+              <span style={{ textAlign: 'right', fontSize: '10px' }}>
+                S{tooltipData.seasonNumber}
+                {'  '}({d3.timeFormat('%Y')(dateParser(tooltipData.date))})
+              </span>
             </div>
             <div className="tooltip-info">
               <p>Average rating</p>

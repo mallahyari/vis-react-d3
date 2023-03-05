@@ -42,7 +42,7 @@ body {
 }
 
 .tooltip-info {
-  width: 200px;
+  width: 210px;
   display: flex;
   justify-content: space-between;
   font-size: 12px;
