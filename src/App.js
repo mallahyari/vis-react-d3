@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { json } from 'd3';
 import { Box, Container, Typography, Grid } from '@mui/material';
+import { Outlet } from 'react-router-dom';
+
 import './App.css';
 import { useData } from './utils/useData';
 import { LineChart } from './components/linechart';
@@ -15,9 +17,8 @@ function App() {
   const [posts, setPosts] = useState(null);
 
   useEffect(() => {
-    console.log('first');
     json(
-      'https://gist.githubusercontent.com/mallahyari/286fe9e7ac977575b1a8e79d07a30e0c/raw/dd7d68f2ba0e07b33334a4c674bcf46f84ece4ec/blog_posts.json'
+      'https://gist.githubusercontent.com/mallahyari/286fe9e7ac977575b1a8e79d07a30e0c/raw/4ca13a3a40023778717ed7406616759cdb7c0a5b/blog_posts.json'
     ).then((data) => setPosts(data));
   }, []);
 
@@ -33,19 +34,21 @@ function App() {
     <Container className="App">
       <Grid container spacing={2}>
         {posts.map((post, i) => (
-          <Grid item xs={4}>
+          <Grid item xs={4} key={i}>
             <BlogCard
-              key={i}
+              id={post.id}
               title={post.title}
               description={post.description}
               date={post.date}
               image={post.image}
               url={post.url}
+              path={post.path}
             />
           </Grid>
         ))}
       </Grid>
 
+      {/* <Outlet /> */}
       {/* <LineChart /> */}
       {/* <SimpleRadar /> */}
       {/* <WeatherPlot /> */}

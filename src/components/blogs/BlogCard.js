@@ -9,7 +9,9 @@ import {
   Typography,
 } from '@mui/material';
 
-const BlogCard = ({ title, description, date, image, url }) => {
+import { Link } from 'react-router-dom';
+
+const BlogCard = ({ id, title, description, date, image, url, path }) => {
   return (
     <Card sx={{ maxWidth: 345, minHeight: 250, textAlign: 'left' }}>
       {/* <CardMedia sx={{ height: 140 }} image={image} title={title} /> */}
@@ -40,6 +42,11 @@ const BlogCard = ({ title, description, date, image, url }) => {
           <Button size="small" href={url} target="_blank">
             Link to post
           </Button>
+          {path !== '' && (
+            <Button size="small" href={`${path}`}>
+              Demo
+            </Button>
+          )}
         </Box>
       </CardActions>
     </Card>
