@@ -1,0 +1,58 @@
+[
+  {
+    "title": "Creating a line chart",
+    "url": "https://mallahyari.github.io/visualdecode/blog/linechart-visualization",
+    "description": "Learn how to create a line chart",
+    "date": "01/15/2023",
+    "image": ""
+  },
+  {
+    "title": "How to add a tooltip to a line chart",
+    "url": "https://mallahyari.github.io/visualdecode/blog/add-tooltip",
+    "description": "Creating a tooltip for a line chart can be a great way to add interactivity and provide additional information to your data visualization. In this blog post, I will show you how to create a tooltip for a line chart using D3 and React.",
+    "date": "01/22/2023",
+    "image": ""
+  },
+  {
+    "title": "Designing Eye-catching Radar Plots with React and D3",
+    "url": "https://mallahyari.github.io/visualdecode/blog/beautiful-radar-plot",
+    "description": "Radar plots, also known as spider plots or star plots, are a great way to visualize multivariate data. They are particularly useful when you want to compare multiple variables for a set of items.",
+    "date": "01/26/2023",
+    "image": ""
+  },
+  {
+    "title": "A Clear Picture: Visualizing Weather Types and Trends",
+    "url": "https://mallahyari.github.io/visualdecode/blog/visualizing-weather-types-and-trends",
+    "description": "Weather has a significant impact on our daily lives, from deciding what to wear to planning outdoor activities. Understanding weather patterns and trends can be crucial in making informed decisions.",
+    "date": "02/02/2023",
+    "image": ""
+  },
+  {
+    "title": "Leveling Up Your Data Visualization Game: Animating Bar Charts with React and D3",
+    "url": "https://mallahyari.github.io/visualdecode/blog/animating-bar-charts-with-react-and-d3",
+    "description": "BData visualization is a powerful tool that enables us to extract insights from large datasets, understand complex relationships between variables, and communicate results in a clear and compelling way. ",
+    "date": "01/26/2023",
+    "image": ""
+  },
+  {
+    "title": "Exploring Data Distributions with an Interactive Ridge Plot",
+    "url": "https://mallahyari.github.io/visualdecode/blog/exploring-data-distributions-with-interactive-ridge-plot",
+    "description": "Learn how to create a line chart",
+    "date": "01/15/2023",
+    "image": ""
+  },
+  {
+    "title": "Exploring Data Science Job Trends in the US: A Python and React Data Analysis Journey- Part 1",
+    "url": "https://mallahyari.github.io/visualdecode/blog/exploring-data-science-job-trends-python-react-d3",
+    "description": "Exploring job trends in the data science industry can reveal insights into the skills and experience employers are seeking, and help job seekers identify promising career opportunities.",
+    "date": "03/11/2023",
+    "image": ""
+  },
+  {
+    "title": "Exploring Data Science Job Trends in the US: A Python and React Data Analysis Journey- Part 2",
+    "url": "https://mallahyari.github.io/visualdecode/blog/exploring-data-science-job-trends-python-react-d3-part-two",
+    "description": "In the first part of this tutorial, we performed exploratory data analysis on our dataset using Python. We processed and cleaned the data, and created some insightful visualizations using Python libraries such as Pandas, Matplotlib, and Seaborn.",
+    "date": "03/18/2023",
+    "image": ""
+  }
+]

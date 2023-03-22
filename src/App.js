@@ -1,5 +1,6 @@
-import React from 'react';
-import { Box, Container } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { json } from 'd3';
+import { Box, Container, Typography, Grid } from '@mui/material';
 import './App.css';
 import { useData } from './utils/useData';
 import { LineChart } from './components/linechart';
@@ -7,17 +8,50 @@ import { SimpleRadar } from './components/radarchart';
 import { WeatherPlot } from './components/weather';
 import { BarChart } from './components/barchart';
 import { RidgePlot } from './components/ridgeplot';
-import { BubbleChart, BubbleChartSmooth } from './components/bubblechart';
+// import { BubbleChart, BubbleChartSmooth } from './components/bubblechart';
+import BlogCard from './components/blogs/BlogCard';
 
 function App() {
+  const [posts, setPosts] = useState(null);
+
+  useEffect(() => {
+    console.log('first');
+    json(
+      'https://gist.githubusercontent.com/mallahyari/286fe9e7ac977575b1a8e79d07a30e0c/raw/dd7d68f2ba0e07b33334a4c674bcf46f84ece4ec/blog_posts.json'
+    ).then((data) => setPosts(data));
+  }, []);
+
+  if (!posts) {
+    return (
+      <Box>
+        <Typography variant="body1">Loading...</Typography>
+      </Box>
+    );
+  }
+
   return (
     <Container className="App">
+      <Grid container spacing={2}>
+        {posts.map((post, i) => (
+          <Grid item xs={4}>
+            <BlogCard
+              key={i}
+              title={post.title}
+              description={post.description}
+              date={post.date}
+              image={post.image}
+              url={post.url}
+            />
+          </Grid>
+        ))}
+      </Grid>
+
       {/* <LineChart /> */}
       {/* <SimpleRadar /> */}
       {/* <WeatherPlot /> */}
       {/* <BarChart /> */}
       {/* <RidgePlot /> */}
-      <BubbleChart />
+      {/* <BubbleChart /> */}
       {/* <BubbleChartSmooth /> */}
     </Container>
   );
